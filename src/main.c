@@ -1,25 +1,27 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include "stdbool.h"
-#include "regex.h"
+#include <stdbool.h>
 
-regex_t regex;
+#include "utils/ticket_utils.h"
 
-bool reg_comp(char *text, char *reg){
-	int reti = regcomp(&regex, reg, REG_EXTENDED);
 
-	if (reti) {
-        fprintf(stderr, "Could not compile regex\n");
-        exit(1);
-    }
-	reti = regexec(&regex, text, 0, NULL, 0);
-	printf("%i\n", reti);
+void init(){
+	srand((unsigned)time(NULL));
 
-	return !reti;
 }
 
 int main(int argc, char *argv[]){
+	(void)argc;
+    (void)argv;
+	init();
+
+	char *tst = (char*)malloc(1024);
+
+	printf("Tst: %s", tst);
+	printf("Mete un numero: ");
+	scanf("%1024[^\n]", tst);
+	printf("El numero ese: %s\n", tst);
 	/*
 	if(!argc){
 		exit(-1);
@@ -35,8 +37,10 @@ int main(int argc, char *argv[]){
 
 	fclose(fptr);
 	*/
-	srand(time(NULL));
-	printf("%i\n", rand());
 
+	//printf("%i\n", rand());
+
+
+	free(tst);
 	return 0;
 }

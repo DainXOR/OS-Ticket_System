@@ -1,14 +1,14 @@
-
-
-/*
 #include <stdlib.h>
 #include <stdio.h>
-#include "stdbool.h"
-#include "regex.h"
+#include <stdint.h>
+#include <stdbool.h>
+#include <regex.h>
+
+#include "utils/regx.h"
 
 regex_t regex;
 
-bool reg_comp(char *text, char *reg){
+bool regx_comp(char *text, char *reg){
 	int reti = regcomp(&regex, reg, REG_EXTENDED);
 
 	if (reti) {
@@ -20,4 +20,3 @@ bool reg_comp(char *text, char *reg){
 
 	return !reti;
 }
-*/
