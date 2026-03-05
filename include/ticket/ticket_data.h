@@ -1,7 +1,6 @@
 #ifndef TICKET_DATA_H
 #define TICKET_DATA_H
 
-#include <cstdint>
 #include <stdint.h>
 
 typedef char request_type;

@@ -1,0 +1,25 @@
+[
+  {
+    "file": "src/ticket/ticket.c",
+    "arguments": [
+      "gcc",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-Werror",
+      "-Wshadow",
+      "-Wconversion",
+      "-Wnull-dereference",
+      "-std=c11",
+      "-Iinclude",
+      "-MMD",
+      "-MP",
+      "-c",
+      "src/ticket/ticket.c",
+      "-o",
+      "build/ticket/ticket.o"
+    ],
+    "directory": "/dev/data_kingston_nvme/dev/c/os/challenge2/ticket_system",
+    "output": "build/ticket/ticket.o"
+  }
+]

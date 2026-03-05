@@ -3,10 +3,10 @@
 #include <time.h>
 #include <stdbool.h>
 
-#include "utils/ticket_utils.h"
+//#include "utils/ticket_utils.h"
 
 
-void init(){
+void init(void){
 	srand((unsigned)time(NULL));
 
 }
@@ -18,7 +18,6 @@ int main(int argc, char *argv[]){
 
 	char *tst = (char*)malloc(1024);
 
-	printf("Tst: %s", tst);
 	printf("Mete un numero: ");
 	scanf("%1024[^\n]", tst);
 	printf("El numero ese: %s\n", tst);
