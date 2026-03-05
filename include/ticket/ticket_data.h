@@ -8,7 +8,7 @@ typedef char request_type;
 typedef struct {
 	uint64_t userID;
 	char* email;
-	uint64_t ticketNumber;
+	uint64_t ticketID;
 	request_type request;
 
 } ticket_data;

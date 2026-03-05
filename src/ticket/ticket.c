@@ -3,21 +3,45 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include <stdbool.h>
 
-#include "utils/rand.h"
 #include "ticket/ticket_data.h"
+#include "utils/rand.h"
+#include "utils/fs.h"
 
-ticket_data generateTicket(uint64_t userID, char* email){
+ticket_data newTicket(uint64_t userID, const char* const email){
 	const uint64_t emailSize = strlen(email);
 
-	ticket_data str = {
+	ticket_data ticket = {
 		.email = (char*)malloc(emailSize),
-		.ticketNumber = random_get(),
+		.ticketID = random_get(),
 		.request = 0,
 		.userID = userID
 	};
 
-	strcpy(str.email, email);
+	strcpy(ticket.email, email);
 
-	return str;
+	return ticket;
+}
+void deleteTicket(ticket_data* ticket){
+	free(ticket->email);
+	ticket->email = NULL;
+
+	return;
+}
+
+bool saveTicket(const ticket_data* const ticket){
+	return false;
+}
+bool eraseTicket(const ticket_data* const ticket){
+	return false;
+}
+ticket_data loadTicket(uint64_t ticketID){
+	ticket_data ticket = {
+		.email = (char*)malloc(20),
+		.ticketID = ticketID,
+		.request = 0,
+		.userID = 0
+	};
+	return
 }
