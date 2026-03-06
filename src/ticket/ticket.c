@@ -8,18 +8,16 @@
 #include "ticket/ticket_data.h"
 #include "utils/rand.h"
 #include "utils/fs.h"
+#include "utils/str.h"
 
 ticket_data newTicket(uint64_t userID, const char* const email){
-	const uint64_t emailSize = strlen(email);
 
 	ticket_data ticket = {
-		.email = (char*)malloc(emailSize),
+		.email = str_clone(email),
 		.ticketID = random_get(),
 		.request = 0,
 		.userID = userID
 	};
-
-	strcpy(ticket.email, email);
 
 	return ticket;
 }

@@ -1,45 +1,56 @@
-#include <stdlib.h>
 #include <stdio.h>
-#include <time.h>
 #include <stdbool.h>
 
-//#include "utils/ticket_utils.h"
+#include "ticket/ticket.h"
 
+int main(void){
+	char id_buf[INPUT_SIZE];
+    char email_buf[INPUT_SIZE];
+    char req_buf[INPUT_SIZE];
 
-void init(void){
-	srand((unsigned)time(NULL));
+    printf("Identificacion: ");
+    if (!read_line(id_buf, sizeof(id_buf))) {
+        fprintf(stderr,"Error reading ID\n");
+        return 1;
+    }
 
-}
+    uint64_t id = strtoull(id_buf,NULL,10);
 
-int main(int argc, char *argv[]){
-	(void)argc;
-    (void)argv;
-	init();
+    if (id == 0){
+        fprintf(stderr,"Invalid ID\n");
+        return 1;
+    }
 
-	char *tst = (char*)malloc(1024);
+    printf("Correo: ");
+    if (!read_line(email_buf,sizeof(email_buf))){
+        fprintf(stderr,"Error reading email\n");
+        return 1;
+    }
 
-	printf("Mete un numero: ");
-	scanf("%1024[^\n]", tst);
-	printf("El numero ese: %s\n", tst);
-	/*
-	if(!argc){
-		exit(-1);
-	}
+    if (!is_valid_email(email_buf)){
+        fprintf(stderr,"Invalid email\n");
+        return 1;
+    }
 
-	if(!reg_comp(argv[1], "(@+)")){
-		puts("Vea pendejo estupido, habla bien bobo");
-	}
+    printf("Tipo de reclamacion: ");
+    if (!read_line(req_buf,sizeof(req_buf))){
+        fprintf(stderr,"Error reading request\n");
+        return 1;
+    }
 
-	FILE *fptr = fopen("mei.txt", "w");
+    random_init();
 
-	fprintf(fptr, "Hola xd");
+    ticket_data ticket = newTicket(id,email_buf);
+    ticket.request = req_buf[0];
 
-	fclose(fptr);
-	*/
+    if (!saveTicket(&ticket)){
+        fprintf(stderr,"Failed to save ticket\n");
+        deleteTicket(&ticket);
+        return 1;
+    }
 
-	//printf("%i\n", rand());
+    printf("Ticket generado: %llu\n",(unsigned long long)ticket.ticketID);
 
-
-	free(tst);
-	return 0;
+    deleteTicket(&ticket);
+    return 0;
 }

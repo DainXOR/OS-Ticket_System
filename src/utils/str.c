@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char* str_clone(char* original){
+char* str_clone(const char* const original){
     if (!original)
         return NULL;
 
