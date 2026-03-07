@@ -97,3 +97,18 @@ file_lines fs_read(const char *path){
     fclose(f);
     return fl;
 }
+
+
+void fs_freeLines(file_lines *fl){
+    if (!fl || !fl->lines)
+        return;
+
+    for (size_t i = 0; i < fl->count; i++) {
+        free(fl->lines[i]);
+    }
+
+    free(fl->lines);
+
+    fl->lines = NULL;
+    fl->count = 0;
+}

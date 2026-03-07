@@ -1,15 +1,22 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #include "ticket/ticket.h"
+#include "utils/rand.h"
+#include "utils/regx.h"
+
+#define INPUT_SIZE 1024
 
 int main(void){
+	random_init();
+
 	char id_buf[INPUT_SIZE];
     char email_buf[INPUT_SIZE];
     char req_buf[INPUT_SIZE];
 
     printf("Identificacion: ");
-    if (!read_line(id_buf, sizeof(id_buf))) {
+    if (!scanf("%1023s", id_buf)) {
         fprintf(stderr,"Error reading ID\n");
         return 1;
     }
@@ -22,23 +29,21 @@ int main(void){
     }
 
     printf("Correo: ");
-    if (!read_line(email_buf,sizeof(email_buf))){
+    if (!scanf("%1023s", email_buf)){
         fprintf(stderr,"Error reading email\n");
         return 1;
     }
 
-    if (!is_valid_email(email_buf)){
+    if (!regx_comp(email_buf, "(@+)")){
         fprintf(stderr,"Invalid email\n");
         return 1;
     }
 
     printf("Tipo de reclamacion: ");
-    if (!read_line(req_buf,sizeof(req_buf))){
+    if (!scanf("%1023s", req_buf)){
         fprintf(stderr,"Error reading request\n");
         return 1;
     }
-
-    random_init();
 
     ticket_data ticket = newTicket(id,email_buf);
     ticket.request = req_buf[0];
